@@ -1,0 +1,64 @@
+<?php get_header(); ?>
+
+<?php
+while (have_posts()) {
+    the_post();
+?>
+    <div class="page-banner">
+        <div style="background-image: url('<?= get_theme_file_uri('/images/ocean.jpg') ?>')"></div>
+        <div class="page-banner__content container container--narrow">
+            <h1 class="page-banner__title"><?php the_title(); ?></h1>
+        </div>
+    </div>
+
+    <div class="container container--narrow page-section">
+        <!-- Combined Back to Blog Link and Date/Author Bar (simple, no icons, no white text) -->
+        <div class="metabox metabox--position-up metabox--with-home-link metabox--with-date-and-back" style="display: flex; align-items: center; gap: 24px;">
+            <a class="metabox__blog-home-link" href="<?php echo site_url('/blog'); ?>">
+                Back to Blog Home
+            </a>
+            <span>
+                Posted by <?php the_author_posts_link(); ?> on <?php the_time('F j, Y'); ?>
+            </span>
+        </div>
+
+        <!-- Post Content -->
+        <div class="generic-content">
+            <?php the_content(); ?>
+        </div>
+
+        <!-- Post Categories -->
+        <div class="post-categories">
+            <p>Categories: <?php echo get_the_category_list(', '); ?></p>
+        </div>
+
+        <!-- Post Tags -->
+        <?php if (has_tag()) : ?>
+            <div class="post-tags">
+                <p>Tags: <?php the_tags('', ', '); ?></p>
+            </div>
+        <?php endif; ?>
+
+        <!-- Post Navigation -->
+        <div class="post-navigation">
+            <?php
+            $prev_post = get_previous_post();
+            $next_post = get_next_post();
+            if ($prev_post) : ?>
+                <div class="prev-post">
+                    <span>Previous Post:</span>
+                    <a href="<?php echo get_permalink($prev_post); ?>"><?php echo get_the_title($prev_post); ?></a>
+                </div>
+            <?php endif;
+            if ($next_post) : ?>
+                <div class="next-post">
+                    <span>Next Post:</span>
+                    <a href="<?php echo get_permalink($next_post); ?>"><?php echo get_the_title($next_post); ?></a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+
+<?php } ?>
+
+<?php get_footer(); ?>
