@@ -1,0 +1,17 @@
+<?php
+
+function university_post_types() {
+    register_post_type('event', array(
+    'public' => true,
+    'labels' => array(
+        'name' => 'Events', // Plural name (sidebar)
+        'singular_name' => 'Event', // Singular name
+        'add_new_item' => 'Add New Event', // "Add New" button
+        'edit_item' => 'Edit Event', // Edit page title
+        'all_items' => 'All Events' // "View All" link
+    ),
+    "menu_icons" => "dashicons-calendar"
+    ));
+}
+add_action('init', 'university_post_types');
+?>
