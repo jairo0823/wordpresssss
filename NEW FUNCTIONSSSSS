@@ -1,0 +1,41 @@
+<?php
+
+
+function jsa_files() {
+    wp_enqueue_script('main-university-js', get_theme_file_uri('/build/index.js'), array('jquery'), null, true);
+    
+    wp_enqueue_style('custom-google-fonts', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
+    wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    
+    wp_enqueue_style('main-style', get_theme_file_uri('/build/style-index.css'));
+    wp_enqueue_style('extra-style', get_theme_file_uri('/build/index.css'));
+}
+
+
+
+
+function university_features() {
+    register_nav_menu('headerMenuLocation', 'Header Menu Location');
+    register_nav_menu('footerLocation1', 'Footer Location One');
+    register_nav_menu('footerLocation2', 'Footer Location Two');
+}
+
+function university_post_types() {
+    register_post_type('event', array(
+    'public' => true,
+    'labels' => array(
+        'name' => 'Events', // Plural name (sidebar)
+        'singular_name' => 'Event', // Singular name
+        'add_new_item' => 'Add New Event', // "Add New" button
+        'edit_item' => 'Edit Event', // Edit page title
+        'all_items' => 'All Events' // "View All" link
+    ),
+    "menu_icons" => "dashicons-calendar"
+    ));
+}
+
+
+add_action('wp_enqueue_scripts', 'jsa_files');
+add_action('after_setup_theme', 'university_features');
+add_action('init', 'university_post_types');
+?>
