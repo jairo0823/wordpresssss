@@ -1,0 +1,2 @@
+'has_archive' => true,
+'rewrite' => array('slug' => 'events')
