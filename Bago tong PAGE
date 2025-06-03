@@ -1,0 +1,7 @@
+ <!-- pwede na to tanggalin-->
+      <div class="generic-content">
+        <?php echo 'PAGE ID:' . get_the_ID(); ?><br>
+        <?php echo 'PARENT ID:' . wp_get_post_parent_id($id);?>
+       <?php the_content(); ?>
+      </div>
+    </div>
